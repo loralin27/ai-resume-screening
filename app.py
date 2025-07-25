@@ -7,7 +7,6 @@ model = pickle.load(open("resume_model.pkl", "rb"))
 vectorizer = pickle.load(open("tfidf_vectorizer.pkl", "rb"))
 
 # Load spaCy model
-spacy.cli.download("en_core_web_sm")
 nlp = spacy.load("en_core_web_sm")
 
 def clean_text(text):
