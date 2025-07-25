@@ -2,13 +2,18 @@ import streamlit as st
 import pickle
 import spacy
 import en_core_web_sm
+from spacy.cli import download
+
 
 # Load model and vectorizer
 model = pickle.load(open("resume_model.pkl", "rb"))
 vectorizer = pickle.load(open("tfidf_vectorizer.pkl", "rb"))
 
-# Load SpaCy model
-nlp = en_core_web_sm.load()
+try:
+    nlp = spacy.load("en_core_web_sm")
+except OSError:
+    download("en_core_web_sm")
+    nlp = spacy.load("en_core_web_sm")
 
 def clean_text(text):
     doc = nlp(text.lower())
